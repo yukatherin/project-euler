@@ -1,5 +1,5 @@
 import time
-from future import __division__
+from __future__ import division
 
 def tear(sheets, idx):
 	torn = list(sheets)
@@ -19,7 +19,7 @@ def rec(sheets):
 	return one_sum + sum([sheets[i]/n * rec(tear(sheets,i)) for i in range(5) if sheets[i]>0])
 
 def p151():
-	print('expected value: ',rec((1,0,0,0,0))-2.0)
+	print('expected value: ', rec((1,0,0,0,0))-2.0)
 
 if __name__=="__main__":
 	b=time.clock()

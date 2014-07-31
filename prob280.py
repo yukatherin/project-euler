@@ -17,15 +17,15 @@ def walk_ant(top_set, bottom_avail, curr_row, curr_col, going_up, k=5):
     B = np.dot(N,R); # B[i][j] is prob. of absorption in absorbing state j starting from transient state i
 
     i = index(curr_row, curr_col) - len(absorb_row) # transient index is index after removing absorbing states
-    steps_from_curr_pos = t[i] # time to absorption 
+    exp_steps_from_curr_pos = t[i] # exp. time to absorption 
     for j,col in enumerate(absorb_row):
         new_top_set = list(top_set)
         new_bottom_avail = list(bottom_avail)
         new_top_set.pop(j) if going_up else new_bottom_avail.pop(j)
         new_curr_row = k-1; 
         new_curr_col = col;
-        steps_from_curr_pos +=  B[i][j] * walk_ant(new_top_set, new_bottom_avail, new_curr_row, new_curr_col, not going_up)
-    return steps_from_curr_pos
+        exp_steps_from_curr_pos +=  B[i][j] * walk_ant(new_top_set, new_bottom_avail, new_curr_row, new_curr_col, not going_up)
+    return exp_steps_from_curr_pos
 
 
 # bijection between grid positions and transition matrix indices:
@@ -44,46 +44,31 @@ def generateTransitionMatrix(absorb_row, k=5):
                 continue;
             #corner cases:
             if (row==0) and (col==0):
-                P[idx][index(row,col+1)]=1/2;
-                P[idx][index(row+1,col)]=1/2;
+                P[idx][[index(row,col+1),index(row+1,col)]]=1/2;
                 continue;
             if (row==0) and (col==4):
-                P[idx][index(row,col-1)]=1/2;
-                P[idx][index(row+1,col)]=1/2;
+                P[idx][[index(row,col-1),index(row+1,col)]]=1/2;
                 continue;
             if (row==4) and (col==0):
-                P[idx][index(row,col+1)] = 1/2;
-                P[idx][index(row-1, col)]=1/2;
+                P[idx][[index(row,col+1),index(row-1, col)]] = 1/2;
                 continue;
             if (row==4) and (col==4):
-                P[idx][index(row,col-1)]=1/2;
-                P[idx][index(row-1,col)]=1/2;
+                P[idx][[index(row,col-1),index(row-1,col)]]=1/2;
                 continue;
             #edge cases:
             if (row==0):
-                P[idx][index(row,col+1)]=1/3;
-                P[idx][index(row,col-1)]=1/3;
-                P[idx][index(row+1,col)]=1/3;
+                P[idx][[index(row,col+1),index(row,col-1),index(row+1,col)]]=1/3;
                 continue;
             if (row==4):
-                P[idx][index(row,col+1)]=1/3;
-                P[idx][index(row,col-1)]=1/3;
-                P[idx][index(row-1,col)]=1/3;
+                P[idx][[index(row,col+1),index(row,col-1),index(row-1,col)]]=1/3;
                 continue;
             if (col==0):
-                P[idx][index(row+1,col)]=1/3;
-                P[idx][index(row-1,col)]=1/3;
-                P[idx][index(row,col+1)]=1/3;
+                P[idx][[index(row+1,col),index(row-1,col),index(row,col+1)]]=1/3;
                 continue;
             if (col==4):
-                P[idx][index(row+1,col)]=1/3;
-                P[idx][index(row-1,col)]=1/3;
-                P[idx][index(row,col-1)]=1/3;
+                P[idx][[index(row+1,col), index(row-1,col), index(row,col-1)]]=1/3;
                 continue;
-            P[idx][index(row+1,col)]=1/4;
-            P[idx][index(row-1,col)]=1/4;
-            P[idx][index(row,col+1)]=1/4;
-            P[idx][index(row,col-1)]=1/4;
+            P[idx][[index(row+1,col),index(row-1,col),index(row,col+1),index(row,col-1)]]=1/4;
     return P;
 
 if __name__=="__main__":

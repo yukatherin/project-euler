@@ -22,9 +22,7 @@ def walk_ant(top_set, bottom_avail, curr_row, curr_col, going_up, k=5):
         new_top_set = list(top_set)
         new_bottom_avail = list(bottom_avail)
         new_top_set.pop(j) if going_up else new_bottom_avail.pop(j)
-        new_curr_row = k-1; 
-        new_curr_col = col;
-        exp_steps_from_curr_pos +=  B[i][j] * walk_ant(new_top_set, new_bottom_avail, new_curr_row, new_curr_col, not going_up)
+        exp_steps_from_curr_pos +=  B[i][j] * walk_ant(new_top_set, new_bottom_avail, k-1, col, not going_up)
     return exp_steps_from_curr_pos
 
 

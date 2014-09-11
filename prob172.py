@@ -13,7 +13,7 @@ def list_combo(rd, rs, tup, max_d, tup_list):
 
 def count_restricted_perm(rep_tup):
     n_perm = 0
-    for perm in set(permutations(rep_tup)): # permutation assigns rep count to digit
+    for perm in set(permutations(rep_tup)): # permutation assigns rep count to digit. really dumb hear
         p = sum(perm[1:])*factorial(sum(perm)-1)
         for val in perm:
             p /= factorial(val)

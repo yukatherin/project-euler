@@ -26,7 +26,6 @@ def walk_ant(top_set, bottom_avail, curr_row, curr_col, going_up, k=5):
     return exp_steps_from_curr_pos
 
 
-# bijection between grid positions and transition matrix indices:
 def index(row, col, k=5):
     return k*row+col;
 

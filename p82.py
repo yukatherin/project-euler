@@ -11,15 +11,15 @@ class SquareGrid():
         assert M.shape[0]==M.shape[1]
         self.M=M
         self.n = M.shape[0]
-        self.i_moves = [-1]
-        self.j_moves = [-1,1]
+        self.i_moves = [-1,1]
+        self.j_moves = [-1]
 
     def in_grid(self,i,j):
         return (i>=0 and i<self.n and j>=0 and j<self.n)
 
     def get_adjacencies(self,(i,j)):
         if i==j==self.n:
-            return [(self.n-1, j) for j in range(self.n)]
+            return [(i, self.n-1) for i in range(self.n)]
         adj = list()
         for delta_i in self.i_moves:
             if (self.in_grid(i+delta_i, j)):
@@ -57,7 +57,15 @@ def findShortestPath(gr):
     unvisited_queue = set((i,j) for i,j in itertools.product(range(gr.n), range(gr.n)))
     unvisited_queue.add(magic_end_pos)
     dist, previous = dijkstras(gr, magic_end_pos, unvisited_queue)
-    grid_min = min([dist[0,j] for j in range(gr.n)])
+    grid_min = min([dist[i,0] for i in range(gr.n)])
+    min_i = np.argmin([dist[i,0] for i in range(gr.n)])
+    node = (min_i,0)
+    while(True):
+        print node, dist[node]
+        node = previous[node]
+        if node[0]==80:
+            break
+
     return grid_min
 
 

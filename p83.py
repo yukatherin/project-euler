@@ -4,8 +4,6 @@ import numpy as np
 
 from squaregrid import *
 
-# strategy, walk back from magic node at (n,n)
-
 
 def findShortestPath(grid, print_path=True):
     source_pos = (0,0)

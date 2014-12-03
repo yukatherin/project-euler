@@ -5,18 +5,17 @@ import numpy as np
 from squaregrid import *
 
 
-def findShortestPath(grid, print_path=True):
+def findShortestPath(grid, printpath=True):
     source_pos = (0,0)
     end_pos = (grid.n-1, grid.n-1)
     unvisited_queue = set((i,j) for i,j in itertools.product(range(grid.n), range(grid.n)))
-    dist, previous = dijkstras(grid, end_pos, unvisited_queue, source_val=grid.M[end_pos])
-    node = source_pos
-    if print_path:
-        while True:
-            print node, dist[node]
-            if node==end_pos:
-                break
-            node = previous[node]
+    dist = dict([(end_pos,grid.M[end_pos])])
+    previous = dict()
+    dijkstras(grid, end_pos, unvisited_queue, dist, previous)
+
+    if printpath:
+        print_path(source_pos, dist, previous, end_pos)
+        
     return dist[source_pos]
 
 def p83():
@@ -29,7 +28,7 @@ def p83():
         print 'cannot find matrix file'
         return
     grid = SquareGrid(M, i_moves = [-1,1], j_moves =[-1,1])
-    print findShortestPath(grid, print_path=True)
+    print findShortestPath(grid, printpath=True)
     
 
 

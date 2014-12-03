@@ -35,10 +35,7 @@ def test_get_adjacencies():
     print gr.get_adjacencies((2,1))
     print gr.get_adjacencies((3,3))
 
-def dijkstras(gr, source_pos, unvisited_queue, source_val):
-    dist = dict()
-    previous = dict()
-    dist[source_pos]= source_val
+def dijkstras(gr, source_pos, unvisited_queue, dist, previous):
     while unvisited_queue:
         u = min(unvisited_queue, key=lambda x:dist.get(x,np.inf))
         unvisited_queue.remove(u)
@@ -48,6 +45,16 @@ def dijkstras(gr, source_pos, unvisited_queue, source_val):
                 dist[v] = alt_dist
                 previous[v] = u
     return dist, previous
+
+def print_path(start_node, dist, previous, end_node):
+
+    node = start_node
+    while(True):
+        if print_path:
+            print node, dist[node]
+        if node==end_node:
+            break
+        node = previous[node]
 
 
 

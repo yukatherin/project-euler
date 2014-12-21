@@ -3,13 +3,12 @@ from project_euler_util.number_theory import is_prime
 def count_prime_partitions(n, primes):
     if n==0:
         return 1
-    if n<0 or not primes:
+    if not primes:
         return 0
     ct=0
-    ct+= count_prime_partitions(n, primes[1:])
     while(n>=0):
-        n -= primes[0]
         ct+= count_prime_partitions(n, primes[1:])
+        n -= primes[0]
     return ct
 
 def p77():

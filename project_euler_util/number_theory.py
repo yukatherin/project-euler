@@ -25,6 +25,13 @@ def gcd(n,m):
         return n
     return gcd(m,n%m)
 
+def reduce_frac(n,d):
+    c_gcd = gcd(n,m)
+    while(cgd >1):
+        n /= c_gcd
+        d /= c_gcd
+    return n,d
+
 
 if __name__=="__main__":
     print is_prime(4804)
@@ -32,4 +39,4 @@ if __name__=="__main__":
     print 'gcd 4,3', gcd(4,3)
     print 'gcd 4,6', gcd(4,6)
     print 'gcd 15,30', gcd(15,30)
-
+    print reduce_frac(15,30)

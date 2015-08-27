@@ -9,7 +9,7 @@ def fill_dict(d, dice_remaining, k, sum):
         fill_dict(d, dice_remaining - 1, k, sum + 1 + i)
 
 def p205():
-    """Probability peter beets colin to 7 decimal places."""
+    """Probability peter beats colin to 7 decimal places."""
 
     # set up 
     peterd = defaultdict(int)
@@ -28,3 +28,4 @@ def p205():
 
 if __name__ == "__main__":
     print p205()
+    

@@ -13,7 +13,7 @@ val src = fromFile("../data/cipher.txt")
 val lineVal = src.mkString.split(",").map(c=>c.trim.toInt)
 
 def xorForIndex(x: Tuple2[Int, Int], key: List[Char]): Char = x match {
-	case (n,i) => (n^key(i%3).toChar.toInt).toChar
+	case (n,i) => (n^key(i%3)).toChar
 }
 
 def decryptAndFilter(key:List[Char], lineVal:Array[Int]): String = {

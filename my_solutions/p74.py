@@ -25,7 +25,7 @@ def len_chain(n, chain):
 
 if __name__=="__main__":
     ct = 0
-    for n in range(10**6):
+    for n in range(1,10**6):
         if n%(10**4)==0:
             print n
         if(len_chain(n, (n,)) ==60):

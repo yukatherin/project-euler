@@ -27,7 +27,6 @@ def walk_ant(top_set, bottom_avail, curr_row, curr_col, going_up, k=5):
     return exp_steps_from_curr_pos
 
 
-
 if __name__=="__main__":
     print ('expected num. steps:'); print walk_ant(range(5), range(5), 2, 2, False)
 	
